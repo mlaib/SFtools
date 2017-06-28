@@ -7,7 +7,7 @@ Author: Mohamed Laib and Mikhail Kanevski
 
 Maintainer: Mohamed Laib <laib.med@gmail.com>
 
-Description: Proposes and adaptes space filling based tools for
+Description: Contains space filling based tools for
     machine learning and data mining. Some functions offer
     several computational techniques and deal with the out of
     memory for large big data by using the ff package.
