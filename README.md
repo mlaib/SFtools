@@ -4,6 +4,7 @@ Space Filling Based Tools for Data Mining
 Version: 0.1.0
 
 Author: Mohamed Laib and Mikhail Kanevski
+
 Maintainer: Mohamed Laib <laib.med@gmail.com>
 
 Description: Proposes and adaptes space filling based tools for
