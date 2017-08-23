@@ -16,5 +16,4 @@ License: GPL-3
 
 URL: https://sites.google.com/site/mohamedlaibwebpage/
 
-Note: The GPU computing version can be found soon, on following url
-    https://sites.google.com/site/mohamedlaibwebpage/Software.
+
