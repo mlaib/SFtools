@@ -40,4 +40,6 @@ Infinity<-function(n=1000){
   r2 <-log(x2+x1)*2
   r3 <-(x1*x2)^2
   r4 <-2*x2+4*x1^2
-  return(Infinity=data.frame(x1,x2,z,r1,r2,r3,r4))}
+  return(Infinity=data.frame(x1,x2,z,r1,r2,r3,r4))
+}
+

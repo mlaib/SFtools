@@ -8,9 +8,9 @@
 #' @param ncores Number of cores to use (by default: \code{ncores=2}).
 #' @return A list of two elements:
 #'  \itemize{
-#'   \item \code{CovD} a vector containing the coverage measure of
+#'   \item \code{CM} a vector containing the coverage measure of
 #'   each step of the SFS.
-#'   \item \code{IdR} a vector containing the added variables during
+#'   \item \code{Id} a vector containing the added variables during
 #'   the selection procedure.
 #'   }
 #' @author Mohamed Laib \email{Mohamed.Laib@@unil.ch}
@@ -29,7 +29,7 @@
 #' @seealso \code{\link{UfsCov}}, \code{\link{UfsCov_ff}}
 #'
 #' @examples
-#' N <- 1000
+#' N <- 800
 #' dat<-Infinity(N)
 #' Results<- UfsCov_par(dat,ncores=2)
 #'
@@ -41,7 +41,6 @@
 #' xlab = "Added Features", ylab = "Coverage measure")
 #' lines(Results[[1]] ,cex=2,col="blue")
 #' grid(lwd=1.5,col="gray" )
-#' box()
 #' axis(2)
 #' axis(1,1:length(nom),nom)
 #' which.min(Results[[1]])
@@ -60,12 +59,16 @@
 #' M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
 #' Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
 #'
-#' @import wordspace doParallel parallel
+#' @import doParallel parallel
 #' @importFrom utils setTxtProgressBar txtProgressBar
+#' @useDynLib SFtools
+#' @importFrom Rcpp sourceCpp
 #' @export
 #'
-
 UfsCov_par<-function(data, ncores=2){
+  if (!is.matrix(data) & !is.data.frame(data)) {
+    stop('The data must be a matrix or a data frame.')
+  }
   so<-so1<-as.matrix(1:ncol(data))
   sf<-0
   ind<-c()
@@ -73,16 +76,17 @@ UfsCov_par<-function(data, ncores=2){
   dat<- apply(data , MARGIN = 2,FUN = function(X) (X - min(X))/diff(range(X)))
   cl <- makeCluster(ncores)
   bprog <- txtProgressBar(min = 0, max = ncol(data))
-  clusterExport(cl, varlist = c("measr","dat","sf","so"), envir=environment())
+  clusterExport(cl=cl, varlist = c("dat","sf","so"), envir=environment())
   for (i in 1:ncol(data)){
-    disA<-parRapply(cl, so, function(X) (measr(dat[,c(X,sf)])))
+    disA<-parRapply(cl, so, function(X) (measr_cpp(as.matrix(dat[,c(X,sf)]))))
     ind<-c(ind,so[which.min(disA)])
     vlu<-c(vlu,min(disA, na.rm = TRUE))
     sf<-ind
 
     so<-as.matrix(so1[-sf])
-    setTxtProgressBar(bprog,i)}
+    setTxtProgressBar(bprog,i)
+  }
   stopCluster(cl)
 
-  return(list(CovD=vlu, IdR=sf))}
-
+  return(list(CM=vlu, Id=sf))
+}

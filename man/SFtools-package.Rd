@@ -6,10 +6,8 @@
 \alias{SFtools-package}
 \title{SFtools: Space Filling Based Tools for Data Mining}
 \description{
-Proposes and adaptes space filling based tools for
-machine learning and data mining. Some functions offer
-several computational techniques and deal with the out of
-memory for large big data by using the ff package.
+Contains space filling based tools for
+machine learning and data mining.
 }
 \references{
 M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
@@ -31,6 +29,7 @@ Experiments. Journal of Statistical Software, 65(11), 1-38.
 Useful links:
 \itemize{
   \item \url{https://sites.google.com/site/mohamedlaibwebpage/}
+  \item Report bugs at \url{https://github.com/mlaib/SFtools/issues}
 }
 
 }

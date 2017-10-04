@@ -15,9 +15,9 @@ distance matrix (by default: blocks=2).}
 \value{
 A list of two elements:
  \itemize{
-  \item \code{CovD} a vector containing the coverage measure of
+  \item \code{CM} a vector containing the coverage measure of
   each step of the SFS.
-  \item \code{IdR} a vector containing the added variables during
+  \item \code{Id} a vector containing the added variables during
   the selection procedure.
   }
 }
@@ -27,7 +27,7 @@ by using a sequatial forward search (for memory efficient storage
 of large data on disk and fast access).
 }
 \note{
-This function is still under developement.
+This function is still under development.
 }
 \examples{
 
@@ -45,7 +45,6 @@ plot(Results[[1]] ,pch=16,cex=1,col="blue", axes = FALSE,
 xlab = "Added Features", ylab = "Coverage measure")
 lines(Results[[1]] ,cex=2,col="blue")
 grid(lwd=1.5,col="gray" )
-box()
 axis(2)
 axis(1,1:length(nom),nom)
 which.min(Results[[1]])

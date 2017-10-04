@@ -12,9 +12,9 @@ UfsCov(data)
 \value{
 A list of two elements:
  \itemize{
-  \item \code{CovD} a vector containing the coverage measure of
+  \item \code{CM} a vector containing the coverage measure of
   each step of the SFS.
-  \item \code{IdR} a vector containing the added variables during
+  \item \code{Id} a vector containing the added variables during
   the selection procedure.
   }
 }
@@ -28,14 +28,14 @@ according to the computing power of your machine, large number of
 data points can take much time and needs more memory.
 See \code{\link{UfsCov_par}} for parellel computing, or
 \code{\link{UfsCov_ff}} for memory efficient storage of large data
-on disk and fast access (by using the \code{ff} and the \code{ffbase} packages).
+on disk and fast access (by using the \code{ffbase} packages).
 }
 \note{
 The algorithm does not deal with missing values and constant
 features. Please make sure to remove them.
 }
 \examples{
-infinity<-Infinity(n=1000)
+infinity<-Infinity(n=800)
 Results<- UfsCov(infinity)
 
 cou<-colnames(infinity)
@@ -46,7 +46,6 @@ plot(Results[[1]] ,pch=16,cex=1,col="blue", axes = FALSE,
 xlab = "Added Features", ylab = "Coverage measure")
 lines(Results[[1]] ,cex=2,col="blue")
 grid(lwd=1.5,col="gray" )
-box()
 axis(2)
 axis(1,1:length(nom),nom)
 which.min(Results[[1]])
@@ -70,7 +69,6 @@ plot(Results[[1]] ,pch=16,cex=1,col="blue", axes = FALSE,
 xlab = "Added Features", ylab = "Coverage measure")
 lines(Results[[1]] ,cex=2,col="blue")
 grid(lwd=1.5,col="gray" )
-box()
 axis(2)
 axis(1,1:length(nom),nom)
 which.min(Results[[1]])

@@ -14,9 +14,9 @@ UfsCov_par(data, ncores=2)
 \value{
 A list of two elements:
  \itemize{
-  \item \code{CovD} a vector containing the coverage measure of
+  \item \code{CM} a vector containing the coverage measure of
   each step of the SFS.
-  \item \code{IdR} a vector containing the added variables during
+  \item \code{Id} a vector containing the added variables during
   the selection procedure.
   }
 }
@@ -39,7 +39,7 @@ use this function with small data, it takes more time than using the
 standard \code{\link{UfsCov}} function.
 }
 \examples{
-N <- 1000
+N <- 800
 dat<-Infinity(N)
 Results<- UfsCov_par(dat,ncores=2)
 
@@ -51,7 +51,6 @@ plot(Results[[1]] ,pch=16,cex=1,col="blue", axes = FALSE,
 xlab = "Added Features", ylab = "Coverage measure")
 lines(Results[[1]] ,cex=2,col="blue")
 grid(lwd=1.5,col="gray" )
-box()
 axis(2)
 axis(1,1:length(nom),nom)
 which.min(Results[[1]])

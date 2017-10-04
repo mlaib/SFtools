@@ -1,19 +1,16 @@
 Package: SFtools
 Type: Package
 Title: Space Filling Based Tools for Data Mining
-Version: 0.1.0
+Version: 0.1.1
 Author: Mohamed Laib and Mikhail Kanevski
 Maintainer: Mohamed Laib <laib.med@gmail.com>
 Description: Contains space filling based tools for
-    machine learning and data mining. Some functions offer
-    several computational techniques and deal with the out of
-    memory for large big data by using the ff package.
-Imports: wordspace, doParallel, ff, parallel, stats
+    machine learning and data mining. 
+Imports: doParallel, ff, parallel, stats, Rcpp, RcppArmadillo
 License: GPL-3
 URL: https://sites.google.com/site/mohamedlaibwebpage/
 BugReports: https://github.com/mlaib/SFtools/issues
 Encoding: UTF-8
 LazyData: true
-Note: The GPU computing version can be found soon, on following url
-    https://sites.google.com/site/mohamedlaibwebpage/Software.
 RoxygenNote: 6.0.1
+LinkingTo: Rcpp

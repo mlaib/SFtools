@@ -9,13 +9,13 @@
 #' distance matrix (by default: blocks=2).
 #' @return A list of two elements:
 #'  \itemize{
-#'   \item \code{CovD} a vector containing the coverage measure of
+#'   \item \code{CM} a vector containing the coverage measure of
 #'   each step of the SFS.
-#'   \item \code{IdR} a vector containing the added variables during
+#'   \item \code{Id} a vector containing the added variables during
 #'   the selection procedure.
 #'   }
 #' @author Mohamed Laib \email{Mohamed.Laib@@unil.ch}
-#' @note This function is still under developement.
+#' @note This function is still under development.
 #' @examples
 #'
 #' \dontrun{
@@ -32,7 +32,6 @@
 #' xlab = "Added Features", ylab = "Coverage measure")
 #' lines(Results[[1]] ,cex=2,col="blue")
 #' grid(lwd=1.5,col="gray" )
-#' box()
 #' axis(2)
 #' axis(1,1:length(nom),nom)
 #' which.min(Results[[1]])
@@ -51,12 +50,12 @@
 #' M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
 #' Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
 #'
-#' @import wordspace ff
+#' @import ff Rcpp
 #' @export
 
 UfsCov_ff<-function(data, blocks=2){
   if (!is.matrix(data) & !is.data.frame(data)) {
-    stop('X must be a matrix or a data frame.')
+    stop('The data must be a matrix or a data frame.')
   }
   sbl<-blocks
   so<-so1<-as.matrix(1:ncol(data))
@@ -72,7 +71,9 @@ UfsCov_ff<-function(data, blocks=2){
     sf<-ind
     so<-as.matrix(so1[-sf])}
 
-  return(list(CovD=vlu, IdR=sf))}
+  return(list(CM=vlu, Id=sf))
+}
+
 
 
 
@@ -86,7 +87,9 @@ measrff<-function (design,  bl) {
   gammabar <- mean(Dmin)
   s <- sum(apply(Dmin, 2, FUN= function(a)((a-gammabar)*(a-gammabar))))
   cov <- (1/gammabar) * ((1/n) * s)^(1/2)
-  return(cov)}
+  return(cov)
+}
+
 
 
 
@@ -103,12 +106,15 @@ distff <- function(tdata, nblocks=2) {
     if (COMB[1] != COMB[2]) {
       g1 <- splt[[COMB[1]]]
       g2 <- splt[[COMB[2]]]
-      slj <-dist.matrix(as.matrix(tdata[c(g1,g2),]), method="euclidean")
+      #slj <-dist.matrix(as.matrix(tdata[c(g1,g2),]), method="euclidean")
+      slj <-measr_ff(as.matrix(tdata[c(g1,g2),]))
       ffmat[c(g1,g2), c(g1,g2)] <- slj
 
     }
   }
-  return(ffmat)}
+  return(ffmat)
+}
+
 
 
 
