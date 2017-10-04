@@ -14,4 +14,6 @@ License: GPL-3
 
 URL: https://sites.google.com/site/mohamedlaibwebpage/
 
-
+# Details
+Mohamed Laib and Mikhail Kanevski (2017). Unsupervised Feature Selection Based on Space
+Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
