@@ -11,6 +11,7 @@ Description: Contains space filling based tools for
     machine learning and data mining. 
     
 License: GPL-3
+[![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/grand-total/SFtools)](http://cran.rstudio.com/package=SFtools)
 
 URL: https://sites.google.com/site/mohamedlaibwebpage/
 
