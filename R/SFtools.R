@@ -1,6 +1,14 @@
 #' @references
-#' M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
-#' Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
+#' M. Laib, M. Kanevski, 
+#' \href{https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2018-57.pdf}{A novel 
+#' filter algorithm for unsupervised feature selection based on a space filling measure}. 
+#' Proceedings of the 26rd European Symposium on Artificial Neural Networks, Computational 
+#' Intelligence and Machine Learning (ESANN), pp. 485-490, Bruges (Belgium), 2018.
+#' 
+#' M. Laib and M. Kanevski, A new algorithm for redundancy minimisation in 
+#' geo-environmental data, 2019.
+#' \href{https://www.sciencedirect.com/science/article/pii/S0098300418310975}{Computers & 
+#' Geosciences, 133 104328}.
 #'
 #' J. A. Royle, D. Nychka, An algorithm for the construction of spatial
 #' coverage designs with implementation in Splus, Computers and Geosciences
@@ -15,7 +23,7 @@
 #' \href{http://www.jstatsoft.org/v65/i11/}{Jstatsoft}.
 #'
 #' @author
-#' Mohamed Laib \email{Mohamed.Laib@@unil.ch}  and
+#' Mohamed Laib \email{Mohamed.Laib@@gmail.com}  and
 #'
 #'  Mikhail Kanevski \email{Mikhail.Kanevski@@unil.ch},
 #'

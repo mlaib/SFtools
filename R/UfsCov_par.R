@@ -8,9 +8,9 @@
 #' @param ncores Number of cores to use (by default: \code{ncores=2}).
 #' @return A list of two elements:
 #'  \itemize{
-#'   \item \code{CM} a vector containing the coverage measure of
+#'   \item \code{CovD} a vector containing the coverage measure of
 #'   each step of the SFS.
-#'   \item \code{Id} a vector containing the added variables during
+#'   \item \code{IdR} a vector containing the added variables during
 #'   the selection procedure.
 #'   }
 #' @author Mohamed Laib \email{Mohamed.Laib@@unil.ch}
@@ -21,16 +21,12 @@
 #'
 #' @details Since the algorithm is based on pairwise distances, and
 #' according to the computing power of your machine, large number of
-#' data points needs more memory. See \code{\link{UfsCov_ff}} for memory
-#' efficient storage of large data on disk and fast access (by using the
-#' \code{ff} and the \code{ffbase} packages).
+#' data points needs more memory. 
 #'
-#'
-#' @seealso \code{\link{UfsCov}}, \code{\link{UfsCov_ff}}
 #'
 #' @examples
 #' N <- 800
-#' dat<-Infinity(N)
+#' dat<-SimData(N)
 #' Results<- UfsCov_par(dat,ncores=2)
 #'
 #' cou<-colnames(dat)
@@ -41,6 +37,7 @@
 #' xlab = "Added Features", ylab = "Coverage measure")
 #' lines(Results[[1]] ,cex=2,col="blue")
 #' grid(lwd=1.5,col="gray" )
+#' box()
 #' axis(2)
 #' axis(1,1:length(nom),nom)
 #' which.min(Results[[1]])
@@ -48,7 +45,7 @@
 #' \dontrun{
 #'
 #' N<-5000
-#' dat<-Infinity(N)
+#' dat<-SimData(N)
 #'
 #' ## Little comparison:
 #' system.time(Uf<-UfsCov(dat))
@@ -56,19 +53,24 @@
 #'
 #' }
 #' @references
-#' M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
-#' Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
+#' M. Laib, M. Kanevski, 
+#' \href{https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2018-57.pdf}{A novel 
+#' filter algorithm for unsupervised feature selection based on a space filling measure}. 
+#' Proceedings of the 26rd European Symposium on Artificial Neural Networks, Computational 
+#' Intelligence and Machine Learning (ESANN), pp. 485-490, Bruges (Belgium), 2018.
+#' 
+#' M. Laib and M. Kanevski, A new algorithm for redundancy minimisation in 
+#' geo-environmental data, 2019.
+#' \href{https://www.sciencedirect.com/science/article/pii/S0098300418310975}{Computers & 
+#' Geosciences, 133 104328}.
+#' 
 #'
-#' @import doParallel parallel
+#' @import Biobase doParallel parallel
 #' @importFrom utils setTxtProgressBar txtProgressBar
-#' @useDynLib SFtools
-#' @importFrom Rcpp sourceCpp
 #' @export
 #'
+
 UfsCov_par<-function(data, ncores=2){
-  if (!is.matrix(data) & !is.data.frame(data)) {
-    stop('The data must be a matrix or a data frame.')
-  }
   so<-so1<-as.matrix(1:ncol(data))
   sf<-0
   ind<-c()
@@ -76,17 +78,19 @@ UfsCov_par<-function(data, ncores=2){
   dat<- apply(data , MARGIN = 2,FUN = function(X) (X - min(X))/diff(range(X)))
   cl <- makeCluster(ncores)
   bprog <- txtProgressBar(min = 0, max = ncol(data))
-  clusterExport(cl=cl, varlist = c("dat","sf","so"), envir=environment())
+  clusterExport(cl, varlist = c("measr","dat","sf","so"), envir=environment())
   for (i in 1:ncol(data)){
-    disA<-parRapply(cl, so, function(X) (measr_cpp(as.matrix(dat[,c(X,sf)]))))
+    disA<-parRapply(cl, so, function(X) (measr(dat[,c(X,sf)])))
     ind<-c(ind,so[which.min(disA)])
     vlu<-c(vlu,min(disA, na.rm = TRUE))
     sf<-ind
 
     so<-as.matrix(so1[-sf])
-    setTxtProgressBar(bprog,i)
-  }
+    setTxtProgressBar(bprog,i)}
   stopCluster(cl)
+  if(!is.null(colnames(dat))){
+    sf <- colnames(data)[sf]
+  }
 
-  return(list(CM=vlu, Id=sf))
-}
+  return(list(CoValue=vlu, VarName=sf))}
+

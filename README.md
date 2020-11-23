@@ -13,13 +13,13 @@ code please visit the GitHub repository:
 <https://github.com/mlaib/SFtools>.
 
 #### Version
-0.1.1
+1.0.0
 
 #### Authors
 Mohamed Laib and Mikhail Kanevski
 
 #### Maintainer
-Mohamed Laib [mohamed.laib (at) unil.ch] or [laib.med (at) gmail.com]
+Mohamed Laib [laib.med (at) gmail.com]
 
 #### URL
 [https://cran.r-project.org/package=SFtools](https://cran.r-project.org/package=SFtools)

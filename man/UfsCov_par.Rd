@@ -14,9 +14,9 @@ UfsCov_par(data, ncores=2)
 \value{
 A list of two elements:
  \itemize{
-  \item \code{CM} a vector containing the coverage measure of
+  \item \code{CovD} a vector containing the coverage measure of
   each step of the SFS.
-  \item \code{Id} a vector containing the added variables during
+  \item \code{IdR} a vector containing the added variables during
   the selection procedure.
   }
 }
@@ -28,9 +28,7 @@ offers a parellel computing.
 \details{
 Since the algorithm is based on pairwise distances, and
 according to the computing power of your machine, large number of
-data points needs more memory. See \code{\link{UfsCov_ff}} for memory
-efficient storage of large data on disk and fast access (by using the
-\code{ff} and the \code{ffbase} packages).
+data points needs more memory.
 }
 \note{
 The algorithm does not deal with missing values and constant
@@ -40,7 +38,7 @@ standard \code{\link{UfsCov}} function.
 }
 \examples{
 N <- 800
-dat<-Infinity(N)
+dat<-SimData(N)
 Results<- UfsCov_par(dat,ncores=2)
 
 cou<-colnames(dat)
@@ -51,6 +49,7 @@ plot(Results[[1]] ,pch=16,cex=1,col="blue", axes = FALSE,
 xlab = "Added Features", ylab = "Coverage measure")
 lines(Results[[1]] ,cex=2,col="blue")
 grid(lwd=1.5,col="gray" )
+box()
 axis(2)
 axis(1,1:length(nom),nom)
 which.min(Results[[1]])
@@ -58,7 +57,7 @@ which.min(Results[[1]])
 \dontrun{
 
 N<-5000
-dat<-Infinity(N)
+dat<-SimData(N)
 
 ## Little comparison:
 system.time(Uf<-UfsCov(dat))
@@ -67,11 +66,16 @@ system.time(Uf.p<-UfsCov_par(dat, ncores = 4))
 }
 }
 \references{
-M. Laib and M. Kanevski (2017). Unsupervised Feature Selection Based on Space
-Filling Concept, \href{https://arxiv.org/abs/1706.08894}{arXiv:1706.08894}.
-}
-\seealso{
-\code{\link{UfsCov}}, \code{\link{UfsCov_ff}}
+M. Laib, M. Kanevski, 
+\href{https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2018-57.pdf}{A novel 
+filter algorithm for unsupervised feature selection based on a space filling measure}. 
+Proceedings of the 26rd European Symposium on Artificial Neural Networks, Computational 
+Intelligence and Machine Learning (ESANN), pp. 485-490, Bruges (Belgium), 2018.
+
+M. Laib and M. Kanevski, A new algorithm for redundancy minimisation in 
+geo-environmental data, 2019.
+\href{https://www.sciencedirect.com/science/article/pii/S0098300418310975}{Computers & 
+Geosciences, 133 104328}.
 }
 \author{
 Mohamed Laib \email{Mohamed.Laib@unil.ch}
