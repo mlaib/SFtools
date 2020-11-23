@@ -34,9 +34,16 @@ GPL-3
 
 
 #### Note
-This work is explained in the following paper:
-* Mohamed Laib and Mikhail Kanevski (2017). Unsupervised Feature Selection Based on Space
-Filling Concept, https://arxiv.org/abs/1706.08894
+To cite this work, please use one of the following:
+M. Laib, M. Kanevski, 
+[A novel filter algorithm for unsupervised feature selection based on a space filling measure](https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2018-57.pdf). 
+Proceedings of the 26rd European Symposium on Artificial Neural Networks, Computational 
+Intelligence and Machine Learning (ESANN), pp. 485-490, Bruges (Belgium), 2018.
+
+M. Laib and M. Kanevski, A new algorithm for redundancy minimisation in 
+geo-environmental data, 2019.
+[Computers & Geosciences, 133 104328](https://www.sciencedirect.com/science/article/pii/S0098300418310975).
+
 
 
 Use it
