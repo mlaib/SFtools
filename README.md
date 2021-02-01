@@ -51,11 +51,16 @@ Use it
 ------
 
     # Install it from CRAN:
-    # install.packages("SFtools")
+    install.packages("SFtools")
 
-    # Or from GitHub
-    #
-    # devtools::install_github("mlaib/SFtools")
+    # Or from GitHub:
+    # First, you need to install: Biobase
+    
+    if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+    BiocManager::install("Biobase")
+    
+    devtools::install_github("mlaib/SFtools")
 
     library(SFtools)
 
